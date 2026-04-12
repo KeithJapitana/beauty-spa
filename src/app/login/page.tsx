@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { createClient } from '@/lib/supabase/client'
 import { toast } from 'sonner'
 import { useGsap } from '@/hooks/use-gsap'
+import { gsap } from '@/lib/gsap/register'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -20,14 +21,11 @@ export default function LoginPage() {
 
   // GSAP entrance animation
   useGsap(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.login-card',
-        { opacity: 0, y: 30, scale: 0.95 },
-        { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'power2.out' }
-      )
-    })
-    return () => ctx.revert()
+    gsap.fromTo(
+      '.login-card',
+      { opacity: 0, y: 30, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.6, ease: 'power2.out' }
+    )
   })
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -48,24 +46,7 @@ export default function LoginPage() {
         return
       }
 
-      // Check if user has a profile
-      const { data: profile } = await supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', data.user.id)
-        .single()
-
-      if (!profile) {
-        toast.error('Account not found', {
-          description: 'Please contact an administrator to set up your account.',
-        })
-        return
-      }
-
-      toast.success('Welcome back!', {
-        description: `Logged in as ${profile.name}`,
-      })
-
+      toast.success('Welcome back!')
       router.push('/admin')
       router.refresh()
     } catch (error) {

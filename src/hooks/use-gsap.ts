@@ -20,7 +20,8 @@ export function useGsap(
   const contextRef = useRef<any>(undefined)
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
+    let ctx: gsap.Context
+    ctx = gsap.context(() => {
       callback(ctx)
     })
     contextRef.current = ctx

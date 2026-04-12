@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X, Sparkles } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { gsap } from '@/lib/gsap/register'
@@ -25,116 +25,100 @@ export function Navbar() {
   const navbarRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
-    }
-
+    const handleScroll = () => setIsScrolled(window.scrollY > 20)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // GSAP shrink animation on scroll
   useEffect(() => {
     if (!navbarRef.current) return
-
     const ctx = gsap.context(() => {
       gsap.to(navbarRef.current, {
-        padding: isScrolled ? '0.75rem 0' : '1.25rem 0',
-        boxShadow: isScrolled ? '0 4px 12px 0 rgb(0 0 0 / 0.08), 0 1px 3px 0 rgb(0 0 0 / 0.04)' : 'none',
+        paddingTop: isScrolled ? '0.75rem' : '1.25rem',
+        paddingBottom: isScrolled ? '0.75rem' : '1.25rem',
         duration: 0.3,
         ease: 'power2.out',
       })
     }, navbarRef)
-
     return () => ctx.revert()
   }, [isScrolled])
 
-  const isActiveLink = (href: string) => {
-    if (href === '/') {
-      return pathname === '/'
-    }
-    return pathname.startsWith(href)
-  }
+  const isActive = (href: string) =>
+    href === '/' ? pathname === '/' : pathname.startsWith(href)
 
   return (
     <header
       ref={navbarRef}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white',
-        isScrolled && 'shadow-nav'
+        'fixed top-0 left-0 right-0 z-50 bg-white transition-shadow duration-300',
+        isScrolled && 'shadow-[0_4px_12px_0_rgb(0_0_0/0.08),_0_1px_3px_0_rgb(0_0_0/0.04)]'
       )}
     >
       <nav className="container mx-auto px-6 py-5">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link
-            href="/"
-            className="flex items-center gap-2 text-xl font-semibold text-gray-900 hover:text-accent transition-colors"
-          >
-            <Sparkles className="w-6 h-6 text-accent" />
-            <span>Blossom Spa</span>
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-[180px] h-[48px] bg-gray-100 rounded-lg flex items-center justify-center text-xs text-gray-400">
+              Logo 180×48
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <ul className="hidden lg:flex items-center gap-8">
+          {/* Desktop Nav */}
+          <ul className="hidden lg:flex items-center gap-7">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <Link
                   href={link.href}
                   className={cn(
-                    'text-sm font-medium transition-colors relative',
-                    isActiveLink(link.href)
-                      ? 'text-accent'
-                      : 'text-gray-700 hover:text-accent'
+                    'text-sm font-medium transition-colors relative pb-0.5',
+                    isActive(link.href)
+                      ? 'text-[#ff385c]'
+                      : 'text-[#222222] hover:text-[#ff385c]'
                   )}
                 >
                   {link.label}
-                  {isActiveLink(link.href) && (
-                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-accent rounded-full" />
+                  {isActive(link.href) && (
+                    <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-[#ff385c] rounded-full" />
                   )}
                 </Link>
               </li>
             ))}
           </ul>
 
-          {/* CTA Button */}
-          <div className="hidden lg:flex items-center gap-4">
-            <Link href="/contact">
-              <Button className="radius-button bg-accent hover:bg-accent-hover text-white font-medium px-6">
-                Book Now
-              </Button>
-            </Link>
-            <Link href="/login">
-              <Button variant="ghost" className="font-medium">
-                Login
-              </Button>
-            </Link>
+          {/* CTA */}
+          <div className="hidden lg:flex items-center gap-3">
+            <Button
+              className="rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white font-medium px-5"
+              asChild
+            >
+              <Link href="/contact">Book a Consultation</Link>
+            </Button>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* Mobile toggle */}
           <button
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-gray-700 hover:text-accent transition-colors"
+            className="lg:hidden p-2 text-[#222222] hover:text-[#ff385c] transition-colors"
             aria-label="Toggle menu"
           >
             {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile menu */}
         {isMobileMenuOpen && (
-          <div className="lg:hidden py-6 border-t border-gray-200 mt-4">
-            <ul className="flex flex-col gap-4">
+          <div className="lg:hidden py-6 border-t border-gray-100 mt-4">
+            <ul className="flex flex-col gap-1">
               {navLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
-                      'text-base font-medium transition-colors block py-2',
-                      isActiveLink(link.href)
-                        ? 'text-accent'
-                        : 'text-gray-700 hover:text-accent'
+                      'text-base font-medium transition-colors block py-2.5 px-2 rounded-lg',
+                      isActive(link.href)
+                        ? 'text-[#ff385c] bg-[#ff385c]/5'
+                        : 'text-[#222222] hover:text-[#ff385c] hover:bg-gray-50'
                     )}
                   >
                     {link.label}
@@ -142,17 +126,15 @@ export function Navbar() {
                 </li>
               ))}
             </ul>
-            <div className="flex flex-col gap-3 mt-6">
-              <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button className="w-full radius-button bg-accent hover:bg-accent-hover text-white font-medium">
-                  Book Now
-                </Button>
-              </Link>
-              <Link href="/login" onClick={() => setIsMobileMenuOpen(false)}>
-                <Button variant="outline" className="w-full font-medium">
-                  Login
-                </Button>
-              </Link>
+            <div className="mt-5">
+              <Button
+                className="w-full rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white font-medium"
+                asChild
+              >
+                <Link href="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+                  Book a Consultation
+                </Link>
+              </Button>
             </div>
           </div>
         )}

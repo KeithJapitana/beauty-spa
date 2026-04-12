@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Skeleton } from '@/components/ui/skeleton'
 import { useGsap } from '@/hooks/use-gsap'
+import { gsap } from '@/lib/gsap/register'
 
 interface DashboardStats {
   totalPosts: number
@@ -150,25 +151,11 @@ export default function AdminDashboardPage() {
 
   // GSAP entrance animation
   useGsap(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        '.stat-card',
-        {
-          opacity: 0,
-          y: 20,
-          scale: 0.95,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.5,
-          stagger: 0.08,
-          ease: 'power2.out',
-        }
-      )
-    })
-    return () => ctx.revert()
+    gsap.fromTo(
+      '.stat-card',
+      { opacity: 0, y: 20, scale: 0.95 },
+      { opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.08, ease: 'power2.out' }
+    )
   }, { dependencies: [stats] })
 
   const statCards = stats
