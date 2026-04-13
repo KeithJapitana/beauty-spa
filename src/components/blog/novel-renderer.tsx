@@ -1,3 +1,5 @@
+'use client'
+
 import { generateHTML } from '@tiptap/core'
 import StarterKit from '@tiptap/starter-kit'
 import TiptapImage from '@tiptap/extension-image'
@@ -6,6 +8,7 @@ import TiptapLink from '@tiptap/extension-link'
 import { Highlight } from '@tiptap/extension-highlight'
 import { HorizontalRule } from '@tiptap/extension-horizontal-rule'
 import type { JSONContent } from '@tiptap/core'
+import { useState, useEffect } from 'react'
 
 const extensions = [
   StarterKit,
@@ -21,20 +24,33 @@ interface NovelRendererProps {
 }
 
 export function NovelRenderer({ content }: NovelRendererProps) {
-  if (!content || Object.keys(content).length === 0) {
-    return null
-  }
+  const [html, setHtml] = useState<string>('')
+  const [isClient, setIsClient] = useState(false)
 
-  let html = ''
-  try {
-    html = generateHTML(content, extensions)
-  } catch {
+  useEffect(() => {
+    setIsClient(true)
+    if (!content || Object.keys(content).length === 0) {
+      setHtml('')
+      return
+    }
+
+    try {
+      const generated = generateHTML(content, extensions)
+      setHtml(generated)
+    } catch (err) {
+      console.error('[NovelRenderer] Failed to generate HTML:', err)
+      setHtml('')
+    }
+  }, [content])
+
+  // Don't render until client-side hydration to avoid SSR mismatch
+  if (!isClient || !html) {
     return null
   }
 
   return (
     <div
-      className="prose prose-lg max-w-none prose-headings:font-semibold prose-headings:text-[#222222] prose-a:text-[#ff385c] prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-[0_6px_16px_0_rgb(0_0_0/0.12)] prose-blockquote:border-l-[#ff385c] prose-blockquote:text-gray-600"
+      className="blog-content"
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

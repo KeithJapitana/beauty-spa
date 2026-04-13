@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
-import { createClient } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/client'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import {
@@ -132,7 +132,7 @@ export default function PostsPage() {
           <h1 className="text-2xl font-bold text-gray-900">Blog Posts</h1>
           <p className="text-gray-600 mt-1">Manage your blog content</p>
         </div>
-        <Button className="radius-button bg-accent hover:bg-accent-hover text-white" asChild>
+        <Button className="rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white" asChild>
           <Link href="/admin/posts/new">
             <Plus className="w-4 h-4 mr-2" />
             New Post
@@ -141,7 +141,7 @@ export default function PostsPage() {
       </div>
 
       {/* Filters */}
-      <Card className="border-0 shadow-card">
+      <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
         <CardContent className="p-4">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
@@ -150,11 +150,11 @@ export default function PostsPage() {
                 placeholder="Search posts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 radius-button"
+                className="pl-10 rounded-lg border-gray-200"
               />
             </div>
             <Select value={statusFilter} onValueChange={(v: any) => setStatusFilter(v)}>
-              <SelectTrigger className="w-full sm:w-48 radius-button">
+              <SelectTrigger className="w-full sm:w-48 rounded-lg border-gray-200">
                 <SelectValue placeholder="Filter by status" />
               </SelectTrigger>
               <SelectContent>
@@ -169,7 +169,7 @@ export default function PostsPage() {
       </Card>
 
       {/* Posts Table */}
-      <Card className="border-0 shadow-card">
+      <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
         {isLoading ? (
           <div className="p-6 space-y-4">
             {[1, 2, 3, 4, 5].map((i) => (

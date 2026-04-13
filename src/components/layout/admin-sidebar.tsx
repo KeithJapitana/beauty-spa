@@ -74,7 +74,7 @@ export function AdminSidebar({ className, onClose }: AdminSidebarProps) {
       {/* Header */}
       <div className="p-6 border-b border-gray-200">
         <Link href="/admin" className="flex items-center gap-2 text-xl font-semibold text-gray-900">
-          <Sparkles className="w-6 h-6 text-accent" />
+          <Sparkles className="w-6 h-6 text-[#ff385c]" />
           <span>Blossom Admin</span>
         </Link>
       </div>
@@ -94,7 +94,7 @@ export function AdminSidebar({ className, onClose }: AdminSidebarProps) {
                 className={cn(
                   'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all',
                   isActive
-                    ? 'bg-accent text-white shadow-md'
+                    ? 'bg-[#ff385c] text-white shadow-md'
                     : 'text-gray-700 hover:bg-white hover:shadow-sm'
                 )}
               >
@@ -114,7 +114,7 @@ export function AdminSidebar({ className, onClose }: AdminSidebarProps) {
           className={cn(
             'flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-all w-full',
             pathname === '/admin/settings'
-              ? 'bg-accent text-white shadow-md'
+              ? 'bg-[#ff385c] text-white shadow-md'
               : 'text-gray-700 hover:bg-white hover:shadow-sm'
           )}
         >
@@ -128,7 +128,7 @@ export function AdminSidebar({ className, onClose }: AdminSidebarProps) {
         <Button
           onClick={handleLogout}
           variant="ghost"
-          className="w-full justify-start text-gray-700 hover:text-accent"
+          className="w-full justify-start text-gray-700 hover:text-[#ff385c]"
         >
           <LogOut className="w-5 h-5 mr-3" />
           Logout
