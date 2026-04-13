@@ -397,7 +397,7 @@ export default function HomePage() {
                           {new Date(post.published_at).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                         </p>
                       )}
-                      <h3 className="font-semibold text-[#222222] mb-2 line-clamp-2 group-hover:text-[#ff385c] transition-colors">{post.title}</h3>
+                      <h3 className="font-semibold text-[#222222] text-lg mb-2 line-clamp-2 group-hover:text-[#ff385c] transition-colors">{post.title}</h3>
                       {post.excerpt && <p className="text-gray-500 text-sm line-clamp-2">{post.excerpt}</p>}
                     </CardContent>
                   </Card>
