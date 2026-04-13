@@ -27,8 +27,9 @@ export const metadata: Metadata = {
   },
 }
 
-export const revalidate = 3600
+export const revalidate = 3600 // ISR: revalidate every hour
 
+// Blog list uses admin client (no cookies) so it can be statically generated
 async function getBlogPosts() {
   try {
     const supabase = createClient()

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation'
 import { Calendar } from 'lucide-react'
-import { createClient } from '@/lib/supabase/admin'
+import { createClient as createServerClient } from '@/lib/supabase/server'
+import { createClient as createAdminClient } from '@/lib/supabase/admin'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { NovelRenderer } from '@/components/blog/novel-renderer'
 import { buildPostJsonLd } from '@/lib/seo/json-ld'
@@ -29,8 +30,8 @@ interface BlogPost {
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    const supabase = createClient()
-    if (!supabase) return null
+    // Use server client at runtime (supports cookies/auth context)
+    const supabase = await createServerClient()
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*, author:profiles(name)')
@@ -44,14 +45,17 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
+// generateStaticParams runs at build time — no HTTP context, can't use cookies.
+// Use the admin client (service role, no cookies needed) instead.
 export async function generateStaticParams() {
   try {
-    const supabase = createClient()
+    const supabase = createAdminClient()
     if (!supabase) return []
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('blog_posts')
       .select('slug')
       .eq('status', 'published')
+    if (error) return []
     return (data || []).map((p) => ({ slug: p.slug }))
   } catch {
     return []
@@ -93,6 +97,7 @@ export async function generateMetadata({
 }
 
 export const revalidate = 3600 // ISR: revalidate hourly
+export const dynamicParams = true // Render new posts on-demand without a redeploy
 
 export default async function BlogPostPage({
   params,
