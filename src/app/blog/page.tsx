@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   },
 }
 
-export const revalidate = 3600 // ISR: revalidate every hour
+export const dynamic = 'force-dynamic' // Always fetch fresh posts from DB
 
 // Blog list uses admin client (no cookies) so it can be statically generated
 async function getBlogPosts() {
