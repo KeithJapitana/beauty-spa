@@ -22,7 +22,7 @@ import {
 } from '@/components/ui/select'
 import { Badge } from '@/components/ui/badge'
 import { Skeleton } from '@/components/ui/skeleton'
-import { createClient } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/client'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import {
