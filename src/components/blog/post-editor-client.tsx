@@ -195,6 +195,17 @@ export default function PostEditorClient({ postId: initialPostId }: PostEditorCl
       if (publishNow) {
         setForm((prev) => ({ ...prev, status: 'published' }))
         toast.success('Post published!')
+
+        // Revalidate blog pages so new post appears immediately
+        try {
+          await fetch('/api/revalidate', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ path: '/blog', slug: form.slug }),
+          })
+        } catch {
+          console.warn('Blog revalidation failed (non-critical)')
+        }
       } else {
         toast.success('Post saved')
       }

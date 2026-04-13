@@ -99,6 +99,18 @@ export default function PostsPage() {
       toast.success('Post deleted successfully')
       setPosts(posts.filter((p) => p.id !== id))
       setDeleteId(null)
+
+      // Revalidate blog pages so deleted post disappears immediately
+      try {
+        const slug = posts.find((p) => p.id === id)?.slug
+        await fetch('/api/revalidate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ slug }),
+        })
+      } catch {
+        console.warn('Revalidation failed (non-critical)')
+      }
     } catch (error) {
       toast.error('Failed to delete post')
     }
