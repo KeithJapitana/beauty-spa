@@ -502,11 +502,11 @@ export default function ContactPage() {
               { step: '02', title: "We'll Reach Out Within Hours", desc: "Expect a call or message from us within 2–4 hours during business hours." },
               { step: '03', title: "We'll Listen and Suggest", desc: "Whether in person or over the phone, we'll take the time to understand what you need before recommending anything." },
             ].map((s, i) => (
-              <div key={i} className="step-card text-center">
+              <div key={i} className="step-card text-center group">
                 <div className="w-14 h-14 rounded-full bg-[#ff385c] text-white font-bold text-lg flex items-center justify-center mx-auto mb-5 shadow-[0_4px_12px_0_rgb(255_56_92/0.3)]">
                   {s.step}
                 </div>
-                <h3 className="font-semibold text-[#222222] mb-3">{s.title}</h3>
+                <h3 className="font-semibold text-[#222222] text-lg mb-2 group-hover:text-[#ff385c] transition-colors">{s.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{s.desc}</p>
               </div>
             ))}
