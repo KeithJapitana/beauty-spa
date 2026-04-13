@@ -1,7 +1,6 @@
 'use client'
 
 import { createClient } from '@/lib/supabase/client'
-import { createClient as createAdminClient } from '@/lib/supabase/admin'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import {
@@ -45,7 +44,7 @@ export default function AdminDashboardPage() {
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const adminClient = createAdminClient()
+        const adminClient = createClient()
         if (!adminClient) {
           setIsLoading(false)
           return
