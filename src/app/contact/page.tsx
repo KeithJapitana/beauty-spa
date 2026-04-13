@@ -26,6 +26,7 @@ import { toast } from 'sonner'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { gsap } from '@/lib/gsap/register'
 import { ScrollTrigger } from '@/lib/gsap/register'
+import { useRecaptcha } from '@/hooks/useRecaptcha'
 
 const serviceOptions = [
   'Not sure yet — I need guidance',
@@ -198,6 +199,7 @@ function BookingCalendar({
 export default function ContactPage() {
   const router = useRouter()
   const formRef = useRef<HTMLDivElement>(null)
+  const { getToken } = useRecaptcha()
   const [form, setForm] = useState({ name: '', email: '', phone: '', service: '', message: '' })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [selectedDate, setSelectedDate] = useState<Date | null>(null)
@@ -243,6 +245,8 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
+    const recaptcha_token = await getToken('contact_form')
+
     const preferredSlot = selectedDate && selectedTime
       ? `\n\nPreferred appointment: ${selectedDate.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })} at ${selectedTime}`
       : ''
@@ -257,6 +261,7 @@ export default function ContactPage() {
           phone: form.phone || null,
           service_interested: form.service || null,
           message: form.message + preferredSlot,
+          recaptcha_token,
         }),
       })
       if (!res.ok) throw new Error()

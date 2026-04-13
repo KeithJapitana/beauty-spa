@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { PublicShell } from "@/components/layout/public-shell";
+import { GTMScript, GTMNoScript } from "@/components/tracking/gtm";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-plus-jakarta-sans",
@@ -27,6 +28,8 @@ export default function RootLayout({
       className={`${plusJakartaSans.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
+        <GTMNoScript />
+        <GTMScript />
         <PublicShell>
           {children}
         </PublicShell>
