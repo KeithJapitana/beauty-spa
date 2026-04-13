@@ -1,8 +1,19 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, MapPin, Phone, Mail, Clock } from 'lucide-react'
+import heroImage from '@/lib/assets/hero_image_1x.webp'
+import diamondPeelImg from '@/lib/assets/diamond_peel_1x.webp'
+import laserHairImg from '@/lib/assets/laser_hair_removal_1x.webp'
+import antiAgingImg from '@/lib/assets/anti_aging_facial_1x.webp'
+import acneTreatmentImg from '@/lib/assets/acne_treatment_1x.webp'
+import bodyContouringImg from '@/lib/assets/body_contouring_1x.webp'
+import whyChooseUsImg from '@/lib/assets/why_choose_us_image_1x.webp'
+import acne6SessionsImg from '@/lib/assets/acne_treatment_6_sessions_1x.webp'
+import antiAging4SessionsImg from '@/lib/assets/anti_aging_facial_4_sessions_1x.webp'
+import diamondPeel3SessionsImg from '@/lib/assets/diamond_peel_3_sessions.webp'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
@@ -15,37 +26,37 @@ const services = [
   {
     title: 'Hydrafacial',
     desc: 'Deep cleansing and hydration that leaves your skin glowing from the inside out.',
-    img: 'https://placehold.co/400x300/f7f3f3/c9a0a0?text=Hydrafacial',
+    img: heroImage,
     href: '/services#hydrafacial',
   },
   {
     title: 'Diamond Peel',
     desc: 'Gentle exfoliation for smoother, brighter skin with zero downtime.',
-    img: 'https://placehold.co/400x300/f3f3f7/a0a0c9?text=Diamond+Peel',
+    img: diamondPeelImg,
     href: '/services#diamond-peel',
   },
   {
     title: 'Laser Hair Removal',
     desc: 'Long-lasting smoothness with our advanced, comfortable laser technology.',
-    img: 'https://placehold.co/400x300/f3f7f3/a0c9a0?text=Laser+Hair',
+    img: laserHairImg,
     href: '/services#laser-hair',
   },
   {
     title: 'Anti-Aging Facial',
     desc: 'Turn back the clock with treatments that restore firmness and youthful radiance.',
-    img: 'https://placehold.co/400x300/f7f5f3/c9b8a0?text=Anti-Aging',
+    img: antiAgingImg,
     href: '/services#anti-aging',
   },
   {
     title: 'Acne Treatment',
     desc: 'Targeted solutions that calm inflammation and prevent future breakouts.',
-    img: 'https://placehold.co/400x300/f7f3f5/c9a0b8?text=Acne+Treatment',
+    img: acneTreatmentImg,
     href: '/services#acne',
   },
   {
     title: 'Body Contouring',
     desc: 'Sculpt and refine your silhouette with our non-invasive body treatments.',
-    img: 'https://placehold.co/400x300/f3f7f7/a0c9c9?text=Body+Contouring',
+    img: bodyContouringImg,
     href: '/services#body-contouring',
   },
 ]
@@ -70,9 +81,9 @@ const whyUs = [
 ]
 
 const beforeAfter = [
-  { img: 'https://placehold.co/600x400/f2f2f2/6a6a6a?text=Before+%26+After+%231', label: 'Acne treatment — 6 sessions' },
-  { img: 'https://placehold.co/600x400/f2f2f2/6a6a6a?text=Before+%26+After+%232', label: 'Anti-aging facial — 4 sessions' },
-  { img: 'https://placehold.co/600x400/f2f2f2/6a6a6a?text=Before+%26+After+%233', label: 'Diamond peel — 3 sessions' },
+  { img: acne6SessionsImg, label: 'Acne treatment — 6 sessions' },
+  { img: antiAging4SessionsImg, label: 'Anti-aging facial — 4 sessions' },
+  { img: diamondPeel3SessionsImg, label: 'Diamond peel — 3 sessions' },
 ]
 
 const trustItems = [
@@ -151,10 +162,25 @@ export default function HomePage() {
     <PageTransitionWrapper className="flex-1">
 
       {/* ─── HERO ─── */}
-      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-white">
-        <div className="container mx-auto px-6 py-24 lg:py-32">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
+      <section ref={heroRef} className="relative min-h-screen flex items-center overflow-hidden bg-black">
+        {/* YouTube background video */}
+        <div className="hero-image absolute inset-0 pointer-events-none">
+          <iframe
+            src="https://www.youtube.com/embed/DjCFi8NRWvs?autoplay=1&mute=1&loop=1&playlist=DjCFi8NRWvs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+            allow="autoplay; encrypted-media"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-[177.78vh] h-[56.25vw]"
+            style={{ border: 'none' }}
+          />
+        </div>
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-[#f2f2f2]/80" />
+
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-6 py-24 lg:py-32">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-end">
+
+            {/* Left — text */}
+            <div className="max-w-2xl">
               <p className="hero-label inline-flex items-center gap-2 text-sm font-semibold text-[#ff385c] uppercase tracking-widest mb-6">
                 <span className="w-8 h-px bg-[#ff385c]" />
                 Welcome to Lumière Beauty Spa
@@ -163,34 +189,39 @@ export default function HomePage() {
                 Your Skin Deserves More Than a Treatment —{' '}
                 <em className="not-italic text-[#ff385c]">It Deserves Care</em>
               </h1>
-              <p className="hero-sub text-lg text-gray-500 leading-relaxed mb-8 max-w-lg">
+              <p className="hero-sub text-lg text-[#222222]/70 leading-relaxed mb-8 max-w-lg">
                 We blend advanced beauty science with heartfelt attention to help you look radiant and feel truly cared for.
               </p>
               <div className="hero-ctas flex flex-col sm:flex-row gap-4">
                 <Button size="lg" className="rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white font-semibold px-8" asChild>
                   <Link href="/contact">Book Your Free Consultation <ArrowRight className="ml-2 w-4 h-4" /></Link>
                 </Button>
-                <Button size="lg" variant="outline" className="rounded-lg border-gray-200 text-[#222222] font-semibold px-8 hover:border-[#ff385c] hover:text-[#ff385c]" asChild>
+                <Button size="lg" variant="outline" className="rounded-lg border-[#222222]/30 text-[#222222] font-semibold px-8 hover:border-[#ff385c] hover:text-[#ff385c]" asChild>
                   <Link href="/services">Explore Our Services</Link>
                 </Button>
               </div>
             </div>
-            <div className="hero-image relative">
-              <div className="absolute -inset-4 bg-gradient-to-br from-[#ff385c]/8 to-transparent rounded-3xl" />
-              <img
-                src="https://placehold.co/720x580/f7f3f3/c9a0a0?text=Hero+Image+%E2%80%94+Warm+Spa+Interior"
-                alt="A warm, inviting spa interior with soft lighting"
-                className="relative w-full rounded-2xl shadow-[0_24px_48px_0_rgb(0_0_0/0.12)] object-cover"
-              />
-              {/* Floating badge */}
-              <div className="absolute -bottom-5 -left-5 bg-white rounded-2xl shadow-[0_8px_24px_0_rgb(0_0_0/0.12)] px-5 py-4 flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#ff385c]/10 flex items-center justify-center text-lg">✦</div>
-                <div>
-                  <p className="text-xs text-gray-400">Trusted by</p>
-                  <p className="font-bold text-[#222222]">5,000+ Clients</p>
-                </div>
+
+            {/* Right — image with badge */}
+            <div className="hero-image relative hidden lg:flex flex-col justify-end">
+              <div className="relative rounded-2xl overflow-hidden shadow-[0_16px_48px_0_rgb(0_0_0/0.22)]">
+                <Image
+                  src={heroImage}
+                  alt="Beauty spa therapist preparing treatment tools"
+                  priority
+                  className="w-full object-cover"
+                  style={{ maxHeight: '520px', objectPosition: 'center' }}
+                />
+              </div>
+              {/* Badge overlapping bottom-left of image */}
+              <div className="absolute -bottom-14 left-1/2 -translate-x-1/2 w-24 h-24 bg-white/90 backdrop-blur-md border border-[#222222]/10 rounded-full flex flex-col items-center justify-center shadow-[0_8px_24px_0_rgb(0_0_0/0.12)]" style={{ top: '350px', bottom: '-170px' }}>
+                <span className="text-[#ff385c] text-base leading-none mb-1">✦</span>
+                <p className="text-[10px] text-[#222222]/50 leading-tight">Trusted by</p>
+                <p className="text-sm font-bold text-[#222222] leading-tight">5,000+</p>
+                <p className="text-[10px] text-[#222222]/70 leading-tight">Clients</p>
               </div>
             </div>
+
           </div>
         </div>
       </section>
@@ -222,7 +253,7 @@ export default function HomePage() {
               <Link key={i} href={s.href} className="service-card group">
                 <Card className="border-0 shadow-[0_6px_16px_0_rgb(0_0_0/0.08),_0_1px_4px_0_rgb(0_0_0/0.05)] hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.14)] transition-all duration-300 rounded-2xl overflow-hidden h-full">
                   <div className="overflow-hidden">
-                    <img src={s.img} alt={s.title} className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <Image src={s.img} alt={s.title} width={400} height={300} className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-[#222222] text-lg mb-2 group-hover:text-[#ff385c] transition-colors">{s.title}</h3>
@@ -258,7 +289,7 @@ export default function HomePage() {
                         <span className="text-[#ff385c] text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
                       </div>
                       <div>
-                        <h3 className="font-semibold text-[#222222] mb-1.5">{item.title}</h3>
+                        <h3 className="font-semibold text-[#222222] text-lg mb-2 group-hover:text-[#ff385c] transition-colors">{item.title}</h3>
                         <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
                       </div>
                     </div>
@@ -267,9 +298,11 @@ export default function HomePage() {
               </div>
             </div>
             <div className="why-image">
-              <img
-                src="https://placehold.co/600x800/f7f3f3/c9a0a0?text=Why+Choose+Us"
+              <Image
+                src={whyChooseUsImg}
                 alt="Close-up of a client receiving a facial treatment, looking relaxed"
+                width={600}
+                height={800}
                 className="w-full rounded-2xl shadow-[0_16px_40px_0_rgb(0_0_0/0.12)] object-cover"
               />
             </div>
@@ -299,7 +332,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {beforeAfter.map((item, i) => (
               <div key={i} className="ba-card rounded-2xl overflow-hidden shadow-[0_6px_16px_0_rgb(0_0_0/0.08)]">
-                <img src={item.img} alt={item.label} className="w-full aspect-[3/2] object-cover" />
+                <Image src={item.img} alt={item.label} width={600} height={400} className="w-full aspect-[3/2] object-cover" />
                 <div className="bg-white px-5 py-4">
                   <p className="text-sm font-medium text-[#222222]">{item.label}</p>
                 </div>

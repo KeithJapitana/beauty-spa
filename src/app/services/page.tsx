@@ -1,12 +1,19 @@
 'use client'
 
 import { useEffect } from 'react'
+import Image from 'next/image'
 import Link from 'next/link'
 import { ArrowRight, Clock, ChevronDown } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { gsap } from '@/lib/gsap/register'
 import { useState } from 'react'
+import heroImage from '@/lib/assets/hero_image_1x.webp'
+import diamondPeelImg from '@/lib/assets/diamond_peel_1x.webp'
+import laserHairImg from '@/lib/assets/laser_hair_removal_1x.webp'
+import antiAgingImg from '@/lib/assets/anti_aging_facial_1x.webp'
+import acneTreatmentImg from '@/lib/assets/acne_treatment_1x.webp'
+import bodyContouringImg from '@/lib/assets/body_contouring_1x.webp'
 
 const services = [
   {
@@ -14,7 +21,7 @@ const services = [
     title: 'Hydrafacial',
     duration: '60 minutes',
     price: 'Starting at ₱X,XXX',
-    img: 'https://placehold.co/600x400/f7f3f3/c9a0a0?text=Hydrafacial',
+    img: heroImage,
     desc: 'Our signature hydrafacial uses a multi-step process to deeply cleanse, extract impurities, and flood your skin with hydration. It\'s suitable for all skin types and there\'s absolutely no downtime — you\'ll walk out glowing.',
     expect: 'A gentle suction device cleanses each pore while simultaneously delivering nourishing serums. Most clients find it relaxing, almost like a facial massage.',
     bestFor: 'Dull skin, dehydration, clogged pores, first-time spa visitors',
@@ -25,7 +32,7 @@ const services = [
     title: 'Diamond Peel Microdermabrasion',
     duration: '45 minutes',
     price: 'Starting at ₱X,XXX',
-    img: 'https://placehold.co/600x400/f3f3f7/a0a0c9?text=Diamond+Peel',
+    img: diamondPeelImg,
     desc: 'A gentle yet effective exfoliation treatment that uses fine diamond-tipped wands to remove dead skin cells, revealing the smoother, brighter skin underneath.',
     expect: 'A mild scratching sensation as the diamond tip sweeps across your skin. No pain, no redness — just immediate improvement in texture.',
     bestFor: 'Uneven skin tone, rough texture, mild scarring, sun damage',
@@ -36,7 +43,7 @@ const services = [
     title: 'Laser Hair Removal',
     duration: '15–60 minutes (depends on area)',
     price: 'Starting at ₱X,XXX per session',
-    img: 'https://placehold.co/600x400/f3f7f3/a0c9a0?text=Laser+Hair+Removal',
+    img: laserHairImg,
     desc: 'Our advanced diode laser targets hair follicles with precision, reducing hair growth gradually over multiple sessions. It\'s fast, effective, and far more comfortable than older laser systems.',
     expect: 'A warm snapping sensation — most clients compare it to a rubber band flick. We use cooling technology to keep you comfortable throughout.',
     bestFor: 'Unwanted body or facial hair, ingrown hairs, long-term hair reduction',
@@ -47,7 +54,7 @@ const services = [
     title: 'Anti-Aging Rejuvenation Facial',
     duration: '75 minutes',
     price: 'Starting at ₱X,XXX',
-    img: 'https://placehold.co/600x400/f7f5f3/c9b8a0?text=Anti-Aging+Facial',
+    img: antiAgingImg,
     desc: 'A luxurious facial that combines deep cleansing with collagen-boosting serums, LED light therapy, and targeted massage techniques to restore firmness and reduce the appearance of fine lines.',
     expect: 'A multi-step pampering session. You\'ll feel deeply relaxed, and the visible plumping effect is often noticeable right after your first session.',
     bestFor: 'Fine lines, loss of firmness, dull or tired-looking skin, self-care ritual',
@@ -58,7 +65,7 @@ const services = [
     title: 'Acne Treatment Program',
     duration: '45–60 minutes per session',
     price: 'Starting at ₱X,XXX per session',
-    img: 'https://placehold.co/600x400/f7f3f5/c9a0b8?text=Acne+Treatment',
+    img: acneTreatmentImg,
     desc: 'A targeted treatment plan that addresses active breakouts, reduces inflammation, and works to prevent future acne through a combination of professional-grade peels, blue light therapy, and customized home care guidance.',
     expect: 'We start with a thorough skin analysis to understand your acne triggers. Each session is adjusted based on how your skin is responding.',
     bestFor: 'Active acne, recurring breakouts, acne scarring, oily skin concerns',
@@ -69,7 +76,7 @@ const services = [
     title: 'Non-Invasive Body Contouring',
     duration: '45–60 minutes',
     price: 'Starting at ₱X,XXX per session',
-    img: 'https://placehold.co/600x400/f3f7f7/a0c9c9?text=Body+Contouring',
+    img: bodyContouringImg,
     desc: 'Using advanced radiofrequency and cavitation technology, this treatment targets stubborn fat deposits and tightens skin without surgery. It\'s a comfortable, relaxing experience with visible results over a series of sessions.',
     expect: 'A warm, massage-like sensation as the device works on targeted areas. Most clients find it so relaxing they nearly fall asleep.',
     bestFor: 'Stubborn fat areas, post-weight-loss tightening, body confidence',
@@ -146,9 +153,11 @@ export default function ServicesPage() {
             </p>
           </div>
           <div className="mt-6">
-            <img
-              src="https://placehold.co/1200x400/f7f3f3/c9a0a0?text=Services+Hero+%E2%80%94+Treatment+Room"
+            <Image
+              src={heroImage}
               alt="Spa treatment room, clean and inviting"
+              width={1200}
+              height={400}
               className="w-full rounded-2xl shadow-[0_8px_24px_0_rgb(0_0_0/0.08)] object-cover"
             />
           </div>
@@ -162,7 +171,7 @@ export default function ServicesPage() {
             <div key={s.id} id={s.id} className="service-row scroll-mt-28">
               <div className={`grid grid-cols-1 lg:grid-cols-2 gap-14 items-center ${s.flip ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 <div>
-                  <img src={s.img} alt={s.title} className="w-full rounded-2xl shadow-[0_8px_24px_0_rgb(0_0_0/0.10)] object-cover" />
+                  <Image src={s.img} alt={s.title} width={600} height={400} className="w-full rounded-2xl shadow-[0_8px_24px_0_rgb(0_0_0/0.10)] object-cover" />
                 </div>
                 <div>
                   <div className="flex items-center gap-3 mb-2">
