@@ -111,18 +111,18 @@ export function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start gap-3 text-sm text-gray-500">
                 <MapPin className="w-4 h-4 shrink-0 mt-0.5 text-[#ff385c]" />
-                <span>[Placeholder Address],<br />Quezon City, Metro Manila</span>
+                <span>Rizal St, Silay,<br />6116 Negros Occidental</span>
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Phone className="w-4 h-4 shrink-0 text-[#ff385c]" />
-                <a href="tel:+63XXXXXXXXXX" className="text-gray-500 hover:text-[#ff385c] transition-colors">
-                  +63 XXX XXX XXXX
+                <a href="tel:+639301041441" className="text-gray-500 hover:text-[#ff385c] transition-colors">
+                  +63 930 104 1441
                 </a>
               </li>
               <li className="flex items-center gap-3 text-sm">
                 <Mail className="w-4 h-4 shrink-0 text-[#ff385c]" />
-                <a href="mailto:hello@yourspa.com" className="text-gray-500 hover:text-[#ff385c] transition-colors">
-                  hello@yourspa.com
+                <a href="mailto:keithjapitana@gmail.com" className="text-gray-500 hover:text-[#ff385c] transition-colors">
+                  keithjapitana@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-3 text-sm text-gray-500">

@@ -46,7 +46,7 @@ export function PageTransitionWrapper({ children, className = '' }: PageTransiti
         }
       )
     },
-    { scope: containerRef, dependencies: [children] }
+    { scope: containerRef }
   )
 
   return (

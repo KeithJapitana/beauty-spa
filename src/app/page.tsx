@@ -203,7 +203,7 @@ export default function HomePage() {
             </div>
 
             {/* Right — image with badge */}
-            <div className="hero-image relative hidden lg:flex flex-col justify-end">
+            <div className="hero-image relative flex flex-col justify-end mt-10 lg:mt-0">
               <div className="relative rounded-2xl overflow-hidden shadow-[0_16px_48px_0_rgb(0_0_0/0.22)]">
                 <Image
                   src={heroImage}
@@ -425,21 +425,29 @@ export default function HomePage() {
       <section className="py-24 bg-[#f7f7f7]">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="rounded-2xl overflow-hidden shadow-[0_8px_24px_0_rgb(0_0_0/0.10)]">
-              <img
-                src="https://placehold.co/600x400/e8e8e8/888888?text=Map+Embed+%E2%80%94+Quezon+City"
-                alt="Location map"
-                className="w-full aspect-[3/2] object-cover"
+            <div className="relative rounded-2xl overflow-hidden shadow-[0_8px_24px_0_rgb(0_0_0/0.10)]">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d482!2d122.9716612!3d10.7899898!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33aed6195a566109%3A0x17d4ee02d36df626!2sOnebel%20Nail%20%26%20Beauty%20Lounge!5e0!3m2!1sen!2sph!4v1713000000000!5m2!1sen!2sph"
+                width="100%"
+                height="400"
+                style={{ border: 0, filter: 'sepia(0.4) hue-rotate(310deg) saturate(1.8) brightness(0.92)' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Onebel Nail & Beauty Lounge location"
+                className="w-full"
               />
+              {/* Brand colour tint overlay — pointer-events-none keeps map interactive */}
+              <div className="absolute inset-0 bg-[#ff385c]/10 pointer-events-none mix-blend-multiply" />
             </div>
             <div>
               <p className="text-sm font-semibold text-[#ff385c] uppercase tracking-widest mb-3">Find Us</p>
               <h2 className="text-3xl font-bold text-[#222222] mb-8">Visit Us</h2>
               <ul className="space-y-5">
                 {[
-                  { icon: <MapPin className="w-5 h-5 text-[#ff385c]" />, text: '[Placeholder Address], Quezon City, Metro Manila' },
-                  { icon: <Phone className="w-5 h-5 text-[#ff385c]" />, text: '+63 XXX XXX XXXX' },
-                  { icon: <Mail className="w-5 h-5 text-[#ff385c]" />, text: 'hello@yourspa.com' },
+                  { icon: <MapPin className="w-5 h-5 text-[#ff385c]" />, text: 'Rizal St, Silay, 6116 Negros Occidental' },
+                  { icon: <Phone className="w-5 h-5 text-[#ff385c]" />, text: '+63 930 104 1441' },
+                  { icon: <Mail className="w-5 h-5 text-[#ff385c]" />, text: 'keithjapitana@gmail.com' },
                   { icon: <Clock className="w-5 h-5 text-[#ff385c]" />, text: 'Mon–Sat, 9:00 AM – 8:00 PM' },
                 ].map((item, i) => (
                   <li key={i} className="flex items-center gap-4">
@@ -449,7 +457,7 @@ export default function HomePage() {
                 ))}
               </ul>
               <Button className="mt-8 rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white font-medium px-8" asChild>
-                <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer">
+                <a href="https://maps.app.goo.gl/nU8hVAJ17Q9rLypd8" target="_blank" rel="noopener noreferrer">
                   Get Directions <ArrowRight className="ml-2 w-4 h-4" />
                 </a>
               </Button>

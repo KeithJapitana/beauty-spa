@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { gsap } from '@/lib/gsap/register'
+import { ScrollTrigger } from '@/lib/gsap/register'
 
 const values = [
   {
@@ -125,7 +126,7 @@ export default function AboutPage() {
               <h2 className="text-3xl font-bold text-[#222222] mb-6">How It All Started</h2>
               <div className="space-y-4 text-gray-500 leading-relaxed">
                 <p>
-                  What began as a small treatment room in Quezon City has grown into a trusted beauty destination — but our heart hasn't changed. We opened our doors [X years ago] with one promise: to treat every client like family.
+                  What began as a small treatment room in Silay City has grown into a trusted beauty destination — but our heart hasn't changed. We opened our doors [X years ago] with one promise: to treat every client like family.
                 </p>
                 <p>
                   We saw too many spas focused on quick transactions rather than real care. Clients would come in, get a treatment, and leave without anyone asking how they truly felt about their skin. We wanted to be different.
