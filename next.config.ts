@@ -1,6 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: 'standalone', // Enable standalone output for Docker
+
   images: {
     // Add Supabase storage domain for optimized images
     remotePatterns: [
