@@ -87,6 +87,7 @@ export function TestimonialCarousel() {
       <div className="flex items-center justify-center gap-3 mt-8">
         <button
           onClick={prev}
+          aria-label="Previous testimonial"
           className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-[#ff385c] hover:text-[#ff385c] transition-all"
         >
           <ChevronLeft className="w-4 h-4" />
@@ -95,13 +96,16 @@ export function TestimonialCarousel() {
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === active ? 'bg-[#ff385c] w-6' : 'bg-gray-200 w-2'
+            aria-label={`Go to testimonial ${i + 1}`}
+            aria-current={i === active ? 'true' : 'false'}
+            className={`h-3 rounded-full transition-all duration-300 min-w-3 ${
+              i === active ? 'bg-[#ff385c] w-6' : 'bg-gray-200 w-3'
             }`}
           />
         ))}
         <button
           onClick={next}
+          aria-label="Next testimonial"
           className="w-10 h-10 rounded-full border border-gray-200 flex items-center justify-center text-gray-500 hover:border-[#ff385c] hover:text-[#ff385c] transition-all"
         >
           <ChevronRight className="w-4 h-4" />

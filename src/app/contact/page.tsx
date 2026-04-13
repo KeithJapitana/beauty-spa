@@ -302,7 +302,7 @@ export default function ContactPage() {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <p className="text-sm font-semibold text-[#ff385c] uppercase tracking-widest">Pick a Schedule</p>
-                <span className="text-xs font-medium bg-gray-100 text-gray-400 px-2.5 py-1 rounded-full">Optional</span>
+                <span className="text-xs font-medium bg-gray-100 text-gray-600 px-2.5 py-1 rounded-full">Optional</span>
               </div>
               <h2 className="text-2xl md:text-3xl font-bold text-[#222222] mb-2">Choose Your Preferred Date & Time</h2>
               <p className="text-gray-500 text-sm">Select a slot and we'll do our best to accommodate you — or skip this and we'll coordinate a time together.</p>
