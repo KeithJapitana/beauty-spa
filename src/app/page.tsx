@@ -386,7 +386,13 @@ export default function HomePage() {
                   <Card className="border-0 shadow-[0_6px_16px_0_rgb(0_0_0/0.08)] hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.14)] transition-all duration-300 rounded-2xl overflow-hidden h-full">
                     <div className="overflow-hidden">
                       {post.cover_image_url ? (
-                        <img src={post.cover_image_url} alt={post.title} className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500" />
+                        <Image
+                          src={post.cover_image_url}
+                          alt={post.title}
+                          width={400}
+                          height={225}
+                          className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500"
+                        />
                       ) : (
                         <div className="w-full aspect-video bg-gradient-to-br from-rose-50 to-pink-100" />
                       )}

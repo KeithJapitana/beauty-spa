@@ -2,6 +2,7 @@ import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapp
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Calendar } from 'lucide-react'
 import { createClient } from '@/lib/supabase/admin'
 import type { Metadata } from 'next'
@@ -79,9 +80,11 @@ export default async function BlogPage() {
                   <Card className="border-0 shadow-[0_6px_16px_0_rgb(0_0_0/0.12),_0_1px_4px_0_rgb(0_0_0/0.08)] hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.16)] transition-shadow duration-300 h-full rounded-2xl overflow-hidden">
                     {post.cover_image_url ? (
                       <div className="aspect-video overflow-hidden">
-                        <img
+                        <Image
                           src={post.cover_image_url}
                           alt={post.title}
+                          width={400}
+                          height={225}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       </div>
