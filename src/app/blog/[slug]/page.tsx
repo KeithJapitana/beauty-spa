@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { Calendar } from 'lucide-react'
-import { createClient as createAdminClient } from '@/lib/supabase/admin'
+import { createClient as createSupabaseClient } from "@supabase/supabase-js"
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { NovelRenderer } from '@/components/blog/novel-renderer'
 import { buildPostJsonLd } from '@/lib/seo/json-ld'
@@ -29,8 +29,8 @@ interface BlogPost {
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    const supabase = createAdminClient()
-    if (!supabase) return null
+    const supabase = createSupabaseClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+    
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*, author:profiles(name)')
@@ -46,8 +46,8 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
 
 export async function generateStaticParams() {
   try {
-    const supabase = createAdminClient()
-    if (!supabase) return []
+    const supabase = createSupabaseClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!)
+    
     const { data, error } = await supabase
       .from('blog_posts')
       .select('slug')

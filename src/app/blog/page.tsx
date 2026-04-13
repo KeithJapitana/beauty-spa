@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import Image from 'next/image'
 import { Calendar } from 'lucide-react'
-import { createClient } from '@/lib/supabase/admin'
+import { createClient as createSupabaseClient } from '@supabase/supabase-js'
 import type { Metadata } from 'next'
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://yourspa.com'
@@ -30,11 +30,13 @@ export const metadata: Metadata = {
 
 export const dynamic = 'force-dynamic' // Always fetch fresh posts from DB
 
-// Blog list uses admin client (no cookies) so it can be statically generated
 async function getBlogPosts() {
   try {
-    const supabase = createClient()
-    if (!supabase) return []
+    // Use anon key — works on Hostinger without SUPABASE_SERVICE_ROLE_KEY at runtime
+    const supabase = createSupabaseClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    )
     const { data, error } = await supabase
       .from('blog_posts')
       .select('id, title, slug, excerpt, cover_image_url, published_at')
