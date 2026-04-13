@@ -171,7 +171,7 @@ export default function ServicesPage() {
             <div key={s.id} id={s.id} className="service-row scroll-mt-28">
               <div className={`grid grid-cols-1 lg:grid-cols-2 gap-14 items-center ${s.flip ? 'lg:[&>*:first-child]:order-2' : ''}`}>
                 <div>
-                  <Image src={s.img} alt={s.title} width={600} height={400} className="w-full rounded-2xl shadow-[0_8px_24px_0_rgb(0_0_0/0.10)] object-cover" />
+                  <Image src={s.img} alt={s.title} width={600} height={400} loading="lazy" className="w-full rounded-2xl shadow-[0_8px_24px_0_rgb(0_0_0/0.10)] object-cover" />
                 </div>
                 <div>
                   <div className="flex items-center gap-3 mb-2">

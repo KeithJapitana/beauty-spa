@@ -253,7 +253,7 @@ export default function HomePage() {
               <Link key={i} href={s.href} className="service-card group">
                 <Card className="border-0 shadow-[0_6px_16px_0_rgb(0_0_0/0.08),_0_1px_4px_0_rgb(0_0_0/0.05)] hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.14)] transition-all duration-300 rounded-2xl overflow-hidden h-full">
                   <div className="overflow-hidden">
-                    <Image src={s.img} alt={s.title} width={400} height={300} className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
+                    <Image src={s.img} alt={s.title} width={400} height={300} loading="lazy" className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-500" />
                   </div>
                   <CardContent className="p-6">
                     <h3 className="font-semibold text-[#222222] text-lg mb-2 group-hover:text-[#ff385c] transition-colors">{s.title}</h3>
@@ -300,9 +300,10 @@ export default function HomePage() {
             <div className="why-image">
               <Image
                 src={whyChooseUsImg}
-                alt="Close-up of a client receiving a facial treatment, looking relaxed"
+                alt="Close-up of client receiving facial treatment"
                 width={600}
                 height={800}
+                loading="lazy"
                 className="w-full rounded-2xl shadow-[0_16px_40px_0_rgb(0_0_0/0.12)] object-cover"
               />
             </div>
@@ -332,7 +333,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {beforeAfter.map((item, i) => (
               <div key={i} className="ba-card rounded-2xl overflow-hidden shadow-[0_6px_16px_0_rgb(0_0_0/0.08)]">
-                <Image src={item.img} alt={item.label} width={600} height={400} className="w-full aspect-[3/2] object-cover" />
+                <Image src={item.img} alt={item.label} width={600} height={400} loading="lazy" className="w-full aspect-[3/2] object-cover" />
                 <div className="bg-white px-5 py-4">
                   <p className="text-sm font-medium text-[#222222]">{item.label}</p>
                 </div>
@@ -391,6 +392,7 @@ export default function HomePage() {
                           alt={post.title}
                           width={400}
                           height={225}
+                          loading="lazy"
                           className="w-full aspect-video object-cover group-hover:scale-105 transition-transform duration-500"
                         />
                       ) : (
