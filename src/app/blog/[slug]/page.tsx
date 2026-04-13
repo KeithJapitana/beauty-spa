@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation'
 import { Calendar } from 'lucide-react'
-import { createClient as createServerClient } from '@/lib/supabase/server'
 import { createClient as createAdminClient } from '@/lib/supabase/admin'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { NovelRenderer } from '@/components/blog/novel-renderer'
@@ -30,8 +29,8 @@ interface BlogPost {
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    // Use server client at runtime (supports cookies/auth context)
-    const supabase = await createServerClient()
+    const supabase = createAdminClient()
+    if (!supabase) return null
     const { data, error } = await supabase
       .from('blog_posts')
       .select('*, author:profiles(name)')
@@ -45,8 +44,6 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
   }
 }
 
-// generateStaticParams runs at build time — no HTTP context, can't use cookies.
-// Use the admin client (service role, no cookies needed) instead.
 export async function generateStaticParams() {
   try {
     const supabase = createAdminClient()
@@ -65,9 +62,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug)
+  const { slug } = await params
+  const post = await getBlogPost(slug)
   if (!post) return {}
 
   const title = post.seo_title || post.title
@@ -96,22 +94,22 @@ export async function generateMetadata({
   }
 }
 
-export const revalidate = 3600 // ISR: revalidate hourly
-export const dynamicParams = true // Render new posts on-demand without a redeploy
+export const revalidate = 3600
+export const dynamicParams = true
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const post = await getBlogPost(params.slug)
+  const { slug } = await params
+  const post = await getBlogPost(slug)
   if (!post) notFound()
 
   const jsonLd = buildPostJsonLd(post)
 
   return (
     <PageTransitionWrapper>
-      {/* JSON-LD structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
