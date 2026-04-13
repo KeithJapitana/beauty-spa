@@ -200,7 +200,16 @@ export default function WebinarsPage() {
       (webinar.youtube_url ? getYouTubeThumbnail(webinar.youtube_url) : null)
 
     return (
-      <Card className="border-0 shadow-card hover:shadow-card-lg transition-shadow overflow-hidden group">
+      <Card className="border-0 transition-shadow overflow-hidden group"
+        style={{
+          boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)',
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.boxShadow = '0 12px 32px 0 rgb(0 0 0 / 0.12), 0 2px 8px 0 rgb(0 0 0 / 0.08)'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.boxShadow = '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)'
+        }}>
         <div className="relative">
           {thumb ? (
             <img src={thumb} alt={webinar.title} className="w-full aspect-video object-cover" />
@@ -308,7 +317,7 @@ export default function WebinarsPage() {
             {upcoming.map((w) => <WebinarCard key={w.id} webinar={w} />)}
           </div>
         ) : (
-          <Card className="border-0 shadow-card">
+          <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
             <CardContent className="text-center py-10">
               <Video className="w-10 h-10 text-gray-200 mx-auto mb-3" />
               <p className="text-gray-500 text-sm">No upcoming webinars</p>
@@ -342,7 +351,7 @@ export default function WebinarsPage() {
             {past.map((w) => <WebinarCard key={w.id} webinar={w} isPast />)}
           </div>
         ) : (
-          <Card className="border-0 shadow-card">
+          <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
             <CardContent className="text-center py-10">
               <p className="text-gray-500 text-sm">No past webinars yet</p>
             </CardContent>

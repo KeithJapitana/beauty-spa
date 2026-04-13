@@ -222,13 +222,15 @@ export default function AdminDashboardPage() {
           <p className="text-gray-600 mt-1">Welcome back! Here's what's happening.</p>
         </div>
         <div className="flex gap-3">
-          <Button variant="outline" className="radius-button">
+          <Button variant="outline" className="rounded-lg">
             <TrendingUp className="w-4 h-4 mr-2" />
             Analytics
           </Button>
-          <Button className="radius-button bg-accent hover:bg-accent-hover text-white">
-            <FileText className="w-4 h-4 mr-2" />
-            New Post
+          <Button className="rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white" asChild>
+            <Link href="/admin/posts/new">
+              <FileText className="w-4 h-4 mr-2" />
+              New Post
+            </Link>
           </Button>
         </div>
       </div>
@@ -243,7 +245,10 @@ export default function AdminDashboardPage() {
               href={card.href}
               className="stat-card group"
             >
-              <Card className="hover:shadow-card-lg transition-shadow duration-300 border-0">
+              <Card
+                className="hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.12),_0_2px_8px_0_rgb(0_0_0/0.08)] transition-shadow duration-300 border-0"
+                style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}
+              >
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                   <CardTitle className="text-sm font-medium text-gray-600">
                     {card.title}
@@ -265,7 +270,10 @@ export default function AdminDashboardPage() {
       </div>
 
       {/* Recent Activity */}
-      <Card className="border-0 shadow-card">
+      <Card
+        className="border-0"
+        style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}
+      >
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Clock className="w-5 h-5 text-gray-500" />
@@ -329,7 +337,10 @@ export default function AdminDashboardPage() {
 
       {/* Quick Actions */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <Card className="border-0 shadow-card hover:shadow-card-lg transition-shadow">
+        <Card
+          className="border-0 hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.12),_0_2px_8px_0_rgb(0_0_0/0.08)] transition-shadow"
+          style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}
+        >
           <CardHeader>
             <CardTitle className="text-base">Quick Post</CardTitle>
           </CardHeader>
@@ -337,7 +348,7 @@ export default function AdminDashboardPage() {
             <p className="text-sm text-gray-600 mb-4">
               Create a new blog post with the Novel editor
             </p>
-            <Button className="w-full radius-button bg-accent hover:bg-accent-hover text-white" asChild>
+            <Button className="w-full rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white" asChild>
               <Link href="/admin/posts/new">
                 <FileText className="w-4 h-4 mr-2" />
                 Create Post
@@ -346,7 +357,10 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-card hover:shadow-card-lg transition-shadow">
+        <Card
+          className="border-0 hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.12),_0_2px_8px_0_rgb(0_0_0/0.08)] transition-shadow"
+          style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}
+        >
           <CardHeader>
             <CardTitle className="text-base">Check Inquiries</CardTitle>
           </CardHeader>
@@ -354,7 +368,7 @@ export default function AdminDashboardPage() {
             <p className="text-sm text-gray-600 mb-4">
               Review and respond to new contact form submissions
             </p>
-            <Button variant="outline" className="w-full radius-button" asChild>
+            <Button variant="outline" className="w-full rounded-lg" asChild>
               <Link href="/admin/inquiries">
                 <MessageSquare className="w-4 h-4 mr-2" />
                 View Inquiries
@@ -363,7 +377,10 @@ export default function AdminDashboardPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-card hover:shadow-card-lg transition-shadow">
+        <Card
+          className="border-0 hover:shadow-[0_12px_32px_0_rgb(0_0_0/0.12),_0_2px_8px_0_rgb(0_0_0/0.08)] transition-shadow"
+          style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}
+        >
           <CardHeader>
             <CardTitle className="text-base">Manage Team</CardTitle>
           </CardHeader>
@@ -371,7 +388,7 @@ export default function AdminDashboardPage() {
             <p className="text-sm text-gray-600 mb-4">
               Add or remove team members and assign roles
             </p>
-            <Button variant="outline" className="w-full radius-button" asChild>
+            <Button variant="outline" className="w-full rounded-lg" asChild>
               <Link href="/admin/users">
                 <Users className="w-4 h-4 mr-2" />
                 Manage Users
