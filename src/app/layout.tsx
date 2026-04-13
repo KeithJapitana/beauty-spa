@@ -13,8 +13,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Blossom Spa - Rejuvenate Your Mind & Body",
-  description: "Experience luxurious spa treatments tailored to your needs. From facials to massages, we help you look and feel your best.",
+  title: {
+    default: "Lumière Beauty Spa",
+    template: "%s | Lumière Beauty Spa",
+  },
+  description: "Experience luxurious beauty treatments tailored to your needs. From facials to body contouring, Lumière Beauty Spa helps you look and feel your best.",
 };
 
 export default function RootLayout({

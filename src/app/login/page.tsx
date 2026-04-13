@@ -63,8 +63,8 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <Link href="/" className="flex items-center justify-center gap-2 text-xl font-semibold text-gray-900 mb-8">
-          <Sparkles className="w-6 h-6 text-accent" />
-          <span>Blossom Spa</span>
+          <Sparkles className="w-6 h-6 text-[#ff385c]" />
+          <span>Lumière Beauty Spa</span>
         </Link>
 
         {/* Login Card */}

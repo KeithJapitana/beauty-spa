@@ -75,7 +75,7 @@ export function AdminSidebar({ className, onClose }: AdminSidebarProps) {
       <div className="p-6 border-b border-gray-200">
         <Link href="/admin" className="flex items-center gap-2 text-xl font-semibold text-gray-900">
           <Sparkles className="w-6 h-6 text-[#ff385c]" />
-          <span>Blossom Admin</span>
+          <span>Lumière Admin</span>
         </Link>
       </div>
 
