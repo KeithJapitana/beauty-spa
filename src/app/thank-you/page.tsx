@@ -6,6 +6,7 @@ import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { gsap } from '@/lib/gsap/register'
+import { ConversionTracker } from '@/components/tracking/conversion'
 
 export default function ThankYouPage() {
   useEffect(() => {
@@ -19,6 +20,7 @@ export default function ThankYouPage() {
 
   return (
     <PageTransitionWrapper>
+      <ConversionTracker />
       <section className="min-h-[80vh] flex items-center justify-center py-24 bg-white">
         <div className="container mx-auto px-6 text-center max-w-xl">
 
