@@ -180,6 +180,8 @@ export default function PostEditorClient({ postId: initialPostId }: PostEditorCl
           .eq('id', postId)
         if (error) throw error
       } else {
+        const { data: userData } = await supabase.auth.getUser()
+        if (userData?.user?.id) payload.author_id = userData.user.id
         const { data, error } = await supabase
           .from('blog_posts')
           .insert(payload)
