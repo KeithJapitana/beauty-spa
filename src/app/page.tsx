@@ -168,6 +168,7 @@ export default function HomePage() {
           <iframe
             src="https://www.youtube.com/embed/DjCFi8NRWvs?autoplay=1&mute=1&loop=1&playlist=DjCFi8NRWvs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
             allow="autoplay; encrypted-media"
+            title="Lumière Beauty Spa - hero background video"
             className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 min-w-full min-h-full w-[177.78vh] h-[56.25vw]"
             style={{ border: 'none' }}
           />
