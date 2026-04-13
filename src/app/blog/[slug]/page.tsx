@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation'
 import { Calendar } from 'lucide-react'
-import { createClient } from '@/lib/supabase/admin'
+import { createClient as createAdminClient } from '@/lib/supabase/admin'
 import { PageTransitionWrapper } from '@/components/layout/page-transition-wrapper'
 import { NovelRenderer } from '@/components/blog/novel-renderer'
 import { buildPostJsonLd } from '@/lib/seo/json-ld'
@@ -29,7 +29,7 @@ interface BlogPost {
 
 async function getBlogPost(slug: string): Promise<BlogPost | null> {
   try {
-    const supabase = createClient()
+    const supabase = createAdminClient()
     if (!supabase) return null
     const { data, error } = await supabase
       .from('blog_posts')
@@ -46,12 +46,13 @@ async function getBlogPost(slug: string): Promise<BlogPost | null> {
 
 export async function generateStaticParams() {
   try {
-    const supabase = createClient()
+    const supabase = createAdminClient()
     if (!supabase) return []
-    const { data } = await supabase
+    const { data, error } = await supabase
       .from('blog_posts')
       .select('slug')
       .eq('status', 'published')
+    if (error) return []
     return (data || []).map((p) => ({ slug: p.slug }))
   } catch {
     return []
@@ -61,9 +62,10 @@ export async function generateStaticParams() {
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }): Promise<Metadata> {
-  const post = await getBlogPost(params.slug)
+  const { slug } = await params
+  const post = await getBlogPost(slug)
   if (!post) return {}
 
   const title = post.seo_title || post.title
@@ -92,21 +94,22 @@ export async function generateMetadata({
   }
 }
 
-export const revalidate = 3600 // ISR: revalidate hourly
+export const revalidate = 3600
+export const dynamicParams = true
 
 export default async function BlogPostPage({
   params,
 }: {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }) {
-  const post = await getBlogPost(params.slug)
+  const { slug } = await params
+  const post = await getBlogPost(slug)
   if (!post) notFound()
 
   const jsonLd = buildPostJsonLd(post)
 
   return (
     <PageTransitionWrapper>
-      {/* JSON-LD structured data */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

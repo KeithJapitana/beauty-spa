@@ -1,6 +1,6 @@
 'use client'
 
-import { createClient } from '@/lib/supabase/admin'
+import { createClient } from '@/lib/supabase/client'
 import { useEffect, useState } from 'react'
 import { toast } from 'sonner'
 import {
@@ -134,7 +134,7 @@ export default function InquiriesPage() {
       </div>
 
       {/* Filters */}
-      <Card className="border-0 shadow-card">
+      <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
         <CardContent className="p-4">
           <div className="flex flex-col sm:flex-row gap-4">
             <div className="relative flex-1">
@@ -162,7 +162,7 @@ export default function InquiriesPage() {
       </Card>
 
       {/* Inquiries Table */}
-      <Card className="border-0 shadow-card">
+      <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
         {isLoading ? (
           <div className="p-6 space-y-4">
             {[1, 2, 3, 4, 5].map((i) => (
