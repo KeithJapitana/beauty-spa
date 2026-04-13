@@ -60,7 +60,7 @@ export default function UsersPage() {
 
   const getRoleBadge = (role: string) => {
     return role === 'admin' ? (
-      <Badge className="bg-accent text-white">
+      <Badge className="bg-[#ff385c] text-white">
         <Shield className="w-3 h-3 mr-1" />
         Admin
       </Badge>
@@ -89,14 +89,14 @@ export default function UsersPage() {
           <h1 className="text-2xl font-bold text-gray-900">Team Members</h1>
           <p className="text-gray-600 mt-1">Manage user access and roles</p>
         </div>
-        <Button className="radius-button bg-accent hover:bg-accent-hover text-white">
+        <Button className="rounded-lg bg-[#ff385c] hover:bg-[#e0304f] text-white">
           <UserPlus className="w-4 h-4 mr-2" />
           Invite Member
         </Button>
       </div>
 
       {/* Users Table */}
-      <Card className="border-0 shadow-card">
+      <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
         {isLoading ? (
           <div className="p-6 space-y-4">
             {[1, 2, 3, 4, 5].map((i) => (
@@ -123,7 +123,7 @@ export default function UsersPage() {
                         {user.avatar_url ? (
                           <AvatarImage src={user.avatar_url} alt={user.name} />
                         ) : (
-                          <AvatarFallback className="bg-accent text-white">
+                          <AvatarFallback className="bg-[#ff385c] text-white">
                             {getInitials(user.name)}
                           </AvatarFallback>
                         )}
@@ -158,11 +158,11 @@ export default function UsersPage() {
 
       {/* Stats */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="border-0 shadow-card">
+        <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
-              <div className="p-3 rounded-full bg-accent/10">
-                <Shield className="w-6 h-6 text-accent" />
+              <div className="p-3 rounded-full bg-[#ff385c]/10">
+                <Shield className="w-6 h-6 text-[#ff385c]" />
               </div>
               <div>
                 <p className="text-sm text-gray-600">Admins</p>
@@ -174,7 +174,7 @@ export default function UsersPage() {
           </CardContent>
         </Card>
 
-        <Card className="border-0 shadow-card">
+        <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <div className="p-3 rounded-full bg-blue-50">

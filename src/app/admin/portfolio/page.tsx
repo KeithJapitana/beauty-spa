@@ -225,7 +225,16 @@ export default function PortfolioPage() {
           {items.map((item) => (
             <Card
               key={item.id}
-              className="border-0 shadow-card hover:shadow-card-lg transition-shadow overflow-hidden group"
+              className="border-0 transition-shadow overflow-hidden group"
+              style={{
+                boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 12px 32px 0 rgb(0 0 0 / 0.12), 0 2px 8px 0 rgb(0 0 0 / 0.08)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)'
+              }}
             >
               <div className="aspect-video bg-gray-100 relative">
                 {item.images[0] ? (
@@ -290,7 +299,7 @@ export default function PortfolioPage() {
           ))}
         </div>
       ) : (
-        <Card className="border-0 shadow-card">
+        <Card className="border-0" style={{ boxShadow: '0 6px 16px 0 rgb(0 0 0 / 0.12), 0 1px 4px 0 rgb(0 0 0 / 0.08)' }}>
           <CardContent className="text-center py-16">
             <ImageIcon className="w-12 h-12 text-gray-200 mx-auto mb-4" />
             <p className="text-gray-500 mb-4">No portfolio items yet</p>
